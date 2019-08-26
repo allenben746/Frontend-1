@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 //styles
-import './App.css';
+import './styles/App.css';
 
 //components
 import Login from './components/Login';
