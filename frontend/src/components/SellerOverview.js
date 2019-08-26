@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 // import{actions} from '../components'
-import FormikAddItemForm from './AddItemForm.js'
+import FormikAddAuction from './AddAuction.js'
 
 const SellerOverview = (props) => {
 
@@ -16,8 +16,8 @@ const SellerOverview = (props) => {
     return (
         <>
         <h1>Seller Profile</h1>
-
-            <FormikAddItemForm addAuctionItem={props.addAuctionItem} />
+        
+            <FormikAddAuction addAuction={props.addAuction} />
         </>
     )
 }
