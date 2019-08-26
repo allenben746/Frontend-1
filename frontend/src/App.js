@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 //styles
 import './App.css';
@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Login />
+        <Route exact path="/" component={Login} />
         <Route path="/sign-up" component={SignUp}/>
       </div>
     </Router>
