@@ -10,7 +10,7 @@ function AddItemForm({values}) {
 
   return (
     <>
-    <h5>Add Items to Auction</h5>
+    <h5>Items to Auction</h5>
       <FieldArray
             name="items"
             render={arrayHelpers => (
