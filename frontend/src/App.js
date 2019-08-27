@@ -7,7 +7,7 @@ import './styles/App.css';
 //components
 import Login from './components/Login';
 import SignUp from './components/SignUp';
-import SellerOverview from './components/SellerOverview.js';
+import SellerOverview from './components/Seller/SellerOverview.js';
 
 function App() {
   return (

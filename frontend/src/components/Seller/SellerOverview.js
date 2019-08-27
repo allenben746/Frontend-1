@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import FormikAddAuction from './AddAuction.js'
 
 const SellerOverview = (props) => {
-
     const deleteAuction = id => {
         props.deleteAuction(id);
     };
