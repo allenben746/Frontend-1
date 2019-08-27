@@ -5,7 +5,7 @@ import Login from './components/Login';
 import AuctionList from './components/AuctionList';
 import { Route, NavLink, Link } from 'react-router-dom';
 import data from './components/data';
-import EditBidList from './components/EditBidderList';
+import EditBidList from './extra/EditBidderList';
 import Bidder from './components/Bidder';
 
 
@@ -40,8 +40,7 @@ function App(data) {
 
       <Route path="/bidder" component={AuctionList} />
       <Route exact path="/auctionpage" component={AuctionPage} />
-      <Bidder />
-      <EditBidList />
+
     </div >
   );
 }
