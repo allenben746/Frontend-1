@@ -1,26 +1,26 @@
 
 import React, { useEffect, useState } from "react";
-import BidderCard from './BidderCard';
+
 import axios from 'axios';
-import data from './data';
+
 import { Link } from 'react-router-dom';
 
 const AuctionList = (props) => {
 
-    const [auctions, setAuctions] = useState(data);
+    const [auctions, setAuctions] = useState();
 
     useEffect(() => {
         const getAuction = () => {
 
 
-            axios.get(data)
+            axios.get('https://silent-auction-api.herokuapp.com/bidder/auctions')
                 .then(res => {
 
                     const items = res.data;
 
 
-                    setAuctions(res.data.results)
-                    console.log(res.data.results)
+                    setAuctions(res.data)
+                    console.log(res.data)
 
 
 
@@ -47,20 +47,21 @@ function AuctionDetails({ auction }) {
                 <h2>{username}</h2>
                 <div className="product">
 
-                    image:{image}
+                    <img src={image} alt="man in pic" />
                     Product:{product}
                     description:{description}
                 </div>
                 <div className="bid">
                     <h3>Bidder</h3>
                     <p>{bid}</p>
+                    <button className="bidnow">Bid Now</button>
                     {/* {bidder && bidder.map(item => (
                     <div key={bidder} className="bidder">
                         {bidder}
                         ))} */}
                 </div>
             </div>
-        </Link>
+        </Link >
 
 
 

@@ -16,7 +16,8 @@
 	align-items: center;
 	justify-content: center;
 	font-size: calc(10px + 2vmin);
-	color: #124559;
+	/* color: $dark-blue-green; */
+	width: 100%;
 }
 
 .App-link {
@@ -37,20 +38,108 @@
 	min-height: 50vh;
 }
 form {
-	font-size: 50px;
+	font-size: 35px;
 }
 button {
 	width: 100px;
+	color: #fafaff;
+	background-color: #01161e;
 }
 main {
 	display: none;
 }
-.auction-page {
-	display: flex;
-	border: 3px solid black;
+nav {
 	width: 100%;
 }
-.column-4 {
-	width: 33.33333%;
-	border: 3px solid black;
+
+.auction-page {
+	border: 3px solid #01161e;
+	width: 100%;
+	height: 100px;
+}
+.column-3 {
+	width: 100%;
+	border: 3px solid #01161e;
+}
+
+.auction-list {
+	background-color: #124559;
+	color: #aec3b0;
+	display: flex;
+	justify-content: center;
+	align-content: space-between;
+	margin-left: 20px;
+	width: 100%;
+}
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.auction-card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+	padding: 16px;
+	text-align: center;
+	background-color: #598392;
+	width: 350px;
+	height: 550px;
+	margin-left: 10px;
+}
+img {
+	width: 200px;
+	height: 200px;
+	background-color: #aec3b0;
+}
+a {
+	display: flex;
+	/* border: 2px solid #fafaff; */
+	color: #fafaff;
+	background-color: #124559;
+	width: 450px;
+	align-content: space-between;
+	text-decoration: none;
+	justify-content: center;
+	font-size: 1.2rem;
+}
+li {
+	list-style: none;
+}
+.bidnow button {
+	background-color: #fafaff;
+}
+.modal {
+	font-size: 12px;
+}
+.modal > .header {
+	width: 100%;
+	border-bottom: 1px solid gray;
+	font-size: 18px;
+	text-align: center;
+	padding: 5px;
+}
+.modal > .content {
+	width: 100%;
+	padding: 10px 5px;
+}
+.modal > .actions {
+	width: 100%;
+	padding: 10px 5px;
+	margin: auto;
+	text-align: center;
+}
+.modal > .close {
+	cursor: pointer;
+	position: absolute;
+	display: block;
+	padding: 2px 5px;
+	line-height: 20px;
+	right: -10px;
+	top: -10px;
+	font-size: 24px;
+	background: #ffffff;
+	border-radius: 18px;
+	border: 1px solid #cfcece;
+}
+.card {
+	width: 100%;
 }

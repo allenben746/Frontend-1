@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import data from './data';
+
+
 const Auction = (props) => {
     const [auction, setAuction] = useState(null);
     const id = props.match.params.id;
@@ -21,11 +24,11 @@ const Auction = (props) => {
     if (!auction) {
         return <div>Loading auction information...</div>;
     }
-    const { username, image, product, description, bid } = auction;
+    const { title, username, image, product, description, bid } = auction;
     return (
 
         <div className="auction-card">
-            <h1>Auction</h1>
+            <h1>{title}</h1>
             <h2>{username}</h2>
             <div className="product">
 
@@ -36,6 +39,7 @@ const Auction = (props) => {
             <div className="bid">
                 <h3>Bidder</h3>
                 <p>{bid}</p>
+                <button>Place bid Now</button>
                 {/* {bidder && bidder.map(item => (
                       <div key={bidder} className="bidder">
                           {bidder}
@@ -59,37 +63,3 @@ export default Auction;
 
 
 
-if (!movie) {
-    return <div>Loading movie information...</div>;
-}
-
-const { title, director, metascore, stars } = movie;
-return (
-
-    <div className="movie-card">
-
-        <h2>{title}</h2>
-
-        <div className="save-wrapper">
-            <div className="movie-director">
-                Director: <em>{director}</em>
-            </div>
-            <div className="movie-metascore">
-                Metascore: <strong>{metascore}</strong>
-            </div>
-            <h3>Actors</h3>
-
-            {stars && stars.map(star => (
-                <div key={star} className="movie-star">
-                    {star}
-                </div>
-            ))}
-        </div>
-        <div className="save-button">Save</div>
-
-    </div>
-);
-  
-}
-
-export default Movie;

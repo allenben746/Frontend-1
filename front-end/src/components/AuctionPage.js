@@ -1,4 +1,5 @@
 import React from 'react';
+import AuctionList from './AuctionList';
 
 const AuctionPage = () => {
     return (
@@ -8,9 +9,9 @@ const AuctionPage = () => {
 
                 <div class="row">
 
-                    <div className="column-4">Newest Arrivals</div>
-                    <div className="column-4">Ending Soon</div>
-                    <div className="column-4">Your Favorites</div>
+                    <div className="column-3"><div class="card">Newest Arrivals<AuctionList /></div></div>
+                    <div className="column-3"><div class="card">Ending Soon<AuctionList /></div></div>
+                    <div className="column-3"><div class="card">Your Favorites<AuctionList /></div></div>
 
                 </div>
 
