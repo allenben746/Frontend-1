@@ -3,7 +3,7 @@ import { withFormik, Form, Field } from "formik";
 import axios from 'axios';
 import * as Yup from "yup";
 
-// send back -> first_name, last_name, email, username
+
 
 const SignUpForm = ({ errors, touched, values, status }) => {
     return (
@@ -13,9 +13,13 @@ const SignUpForm = ({ errors, touched, values, status }) => {
                 <Field type="text" name="first_name" placeholder="First name" />
                 <Field type="text" name="last_name" placeholder="Last name" />
                 <Field type="text" name="email" placeholder="Email" />
+                <Field type="text" name="username" placeholder="Username" />
                 <Field type="password" name="password" placeholder="Password" />
-                <label>Bidder
-                <Field type="checkbox" name="user_classification" />
+                <label>Bidder or Seller?
+                <Field component="select" name="user_classification" >
+                    <option value="Bidder">Bidder</option>
+                    <option value="Seller">Seller</option>
+                </Field>
                 </label>
                 <button type="submit">Submit Info</button>
             </Form>
@@ -26,11 +30,12 @@ const SignUpForm = ({ errors, touched, values, status }) => {
 const FormikUserForm = withFormik({
     
     //Handles State
-    mapPropsToValues({first_name, last_name, email, password, user_classification}){
+    mapPropsToValues({first_name, last_name, email, username, password, user_classification}){
         return {
             first_name: first_name || "",
             last_name: last_name || "",
             email: email || "",
+            username: username || "",
             password: password || "",
             user_classification: user_classification || ""
         }
@@ -48,8 +53,8 @@ const FormikUserForm = withFormik({
           .min(6)
           .max(20)
           .required('A password is required'),
-          user_classification: Yup.boolean()
-          .required('Checkbox is required')
+          user_classification: Yup.string()
+          .required('Selection is required')
       }),
      //Post request
     handleSubmit(values, {setStatus, resetForm}){
