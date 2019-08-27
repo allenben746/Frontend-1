@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
+import axios from 'axios';
 
 const LoginForm = () => {
     return (
@@ -23,34 +24,30 @@ const LoginForm = () => {
 const FormikUserForm = withFormik({
     
     //Handles State
-    // mapPropsToValues({name, email, password}){
-    //     return {
-    //         name: name || "",
-    //         email: email || "",
-    //         password: password || "",
-    //     }
-    // },
+    mapPropsToValues({username, password}){
+        return {
+            username: username || "",
+            password: password || "",
+        }
+    },
     //Yup Validation
     validationSchema: Yup.object().shape({
-        name: Yup.string()
-        .required('Name is required'),
-        email: Yup.string()
-          .email()
-          .required('Email is required'),
+        username: Yup.string()
+        .required('Your username is required'),
         password: Yup.string()
-          .min(6)
-          .max(20)
-          .required('A password is required')
-      })
+          .required('Your password is required')
+      }),
     //Post request
-    // handleSubmit(values, {setStatus, resetForm}){
-    //     console.log("Form submitted", values);
-    //     axios.post("https://reqres.in/api/users", values)
-    //     .then(res => {
-    //         setStatus(res.data)
-    //         resetForm();
-    //         })
-    //     .catch(err => console.log(err))
-    // }
+    handleSubmit(values, {setStatus, resetForm}){
+        console.log("Logging in...", values);
+        axios.post("https://silent-auction-api.herokuapp.com/api/auth/login", values)
+        .then(res => {
+            setStatus(res.data)
+            resetForm();
+            console.log("Server response ->", res.data);
+            console.log("Logged In");
+            })
+        .catch(err => console.log(err))
+    }
 })(LoginForm);
 export default FormikUserForm;
