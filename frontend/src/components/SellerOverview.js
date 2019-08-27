@@ -16,8 +16,9 @@ const SellerOverview = (props) => {
     return (
         <>
         <h1>Seller Profile</h1>
-        
-            <FormikAddAuction addAuction={props.addAuction} />
+            <h4>User:</h4>
+            <h2>Auctions:</h2>
+                <FormikAddAuction addAuction={props.addAuction} />
         </>
     )
 }

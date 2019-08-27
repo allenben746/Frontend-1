@@ -5,7 +5,7 @@ import FormikAddItemForm from './AddItemForm';
 function AddAuction(props) {
   return (
     <>
-    <h2>Create an Auction</h2>
+    <h3>Create an Auction</h3>
     <Form>
 
       <div>
