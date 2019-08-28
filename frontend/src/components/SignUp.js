@@ -2,7 +2,7 @@ import React from 'react';
 import { withFormik, Form, Field } from "formik";
 import axios from 'axios';
 import * as Yup from "yup";
-import SellerOverview from './SellerOverview';
+import SellerOverview from './Seller/SellerOverview';
 
 
 const SignUpForm = ({ errors, touched, values, status }) => {
