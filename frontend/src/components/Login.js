@@ -4,18 +4,23 @@ import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from 'axios';
 
+//stlyes
+import "../styles/Login.scss";
+
 const LoginForm = () => {
     return (
-        <div className="userForm">
-            <h1>Login</h1>
-            <Form>
-                <Field type="text" name="username" placeholder="Username" />
-                <Field type="password" name="password" placeholder="Password" />
-                <button type="submit">Login</button>
-            </Form>
-            <div>
-                <h4>Don't have an account?</h4>
-                <h5><Link to="/sign-up">Sign Up.</Link></h5>
+        <div className="container">
+            <div className="userForm">
+                <h1>Login</h1>
+                <Form >
+                    <Field className="item" type="text" name="username" placeholder="Username" />
+                    <Field className="item" type="password" name="password" placeholder="Password" />
+                    <button className="item" type="submit">Login</button>
+                </Form>
+                <div>
+                    <h4>Don't have an account?</h4>
+                    <h5><Link to="/sign-up">Sign Up.</Link></h5>
+                </div>
             </div>
         </div>
     )

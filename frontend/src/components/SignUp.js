@@ -2,7 +2,7 @@ import React from 'react';
 import { withFormik, Form, Field } from "formik";
 import axios from 'axios';
 import * as Yup from "yup";
-
+import SellerOverview from './SellerOverview';
 
 
 const SignUpForm = ({ errors, touched, values, status }) => {
@@ -49,6 +49,8 @@ const FormikUserForm = withFormik({
         email: Yup.string()
           .email()
           .required('Email is required'),
+          username: Yup.string()
+          .required('Username is required'),
         password: Yup.string()
           .min(6)
           .max(20)
