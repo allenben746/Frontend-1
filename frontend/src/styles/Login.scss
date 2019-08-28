@@ -1,0 +1,25 @@
+body {
+    background-color: #aec3b0;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.userForm {
+    background-color: #01161e;
+    width: 80vw;
+    height: 80vh;
+    border-radius: 15%;
+}
+.userForm Form {
+    display: flex;
+    flex-direction: column;
+    width: 10vw;
+    
+    .item {
+        display: flex;
+        justify-content: space-evenly;
+    }
+}
