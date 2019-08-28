@@ -7,31 +7,31 @@ import { Link } from 'react-router-dom';
 
 const AuctionList = (props) => {
 
-    const [auctions, setAuctions] = useState();
+    const [auction, setAuction] = useState();
 
     useEffect(() => {
-        const getAuction = () => {
-
-
-            axios.get('https://silent-auction-api.herokuapp.com/bidder/auctions')
-                .then(res => {
-
-                    const items = res.data;
-
-
-                    setAuctions(res.data)
-                    console.log(res.data)
 
 
 
-                });
-        }
-        getAuction();
+        axios.get("https://silent-auction-api.herokuapp.com/bidder/auctions")
+            .then(res => {
+
+                const items = res.data;
+
+
+                setAuction(res.data)
+                console.log(res.data)
+
+
+
+            });
+
+
     }, []);
 
     return (
         <div className="auction-list">
-            {auctions && auctions.map(auction => (
+            {auction && auction.map(auction => (
                 <AuctionDetails key={auction.id} auction={auction} />
             ))}
 
@@ -40,20 +40,21 @@ const AuctionList = (props) => {
 }
 
 function AuctionDetails({ auction }) {
-    const { username, image, product, description, bid } = auction;
+    const { auction_name, image, product_id, auction_description, starting_bid, end_time } = auction;
     return (
         <Link to={`/auctions/${auction.id}`}>
             <div className="auction-card">
-                <h2>{username}</h2>
+                <h2>{auction_name}</h2>
                 <div className="product">
 
-                    <img src={image} alt="man in pic" />
-                    Product:{product}
-                    description:{description}
+                    <img src={image} alt="" />
+                    <p>{product_id}</p>
+                    <p>{auction_description}</p>
                 </div>
                 <div className="bid">
                     <h3>Bidder</h3>
-                    <p>{bid}</p>
+                    <p>{starting_bid}</p>
+                    <p>{end_time}</p>
                     <button className="bidnow">Bid Now</button>
                     {/* {bidder && bidder.map(item => (
                     <div key={bidder} className="bidder">
@@ -61,7 +62,7 @@ function AuctionDetails({ auction }) {
                         ))} */}
                 </div>
             </div>
-        </Link >
+        </Link>
 
 
 

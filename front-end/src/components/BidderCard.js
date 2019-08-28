@@ -6,22 +6,17 @@
 
 
 import React from 'react';
-import data from './data';
-const BidderCard = (props) => {
+import { Link } from 'react-router-dom';
+
+const BidderCard = ({ bidder, deleteBid }) => {
     return (
         <div>
-
-
-            <h1>{props.name}</h1>
-            <img src={props.image} />
-            <p>{props.name}</p>
-
-            <p>{props.product}</p>
-            <p>{props.description}</p>
-            <p>{props.bid}</p>
+            {bidder.username} {bidder.bid}
+            <button onClick={() => deleteBid(bidder.id)}>Delete</button>
+            <Link to={`/bidder/edit/${bidder.id}`}>Edit</Link>
         </div>
-    )
-}
+    );
+};
 
 export default BidderCard;
 
