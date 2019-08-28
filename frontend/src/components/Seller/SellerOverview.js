@@ -18,7 +18,7 @@ const SellerOverview = (props) => {
                     <h4>Auction: {auction.auction_name}</h4>
                     <h4>Start Time: {auction.start_time}</h4>
                     <h4>Starting Bid: {auction.starting_bid}</h4>
-                    {/* <Button onClick={() => props.deleteAuction(auction.id)}>Smurf Left the Village</Button> */}
+                    {/* <Button onClick={() => props.deleteAuction(auction.id)}>Delete Auction</Button> */}
                 </div>
                 ))
             ) : (
