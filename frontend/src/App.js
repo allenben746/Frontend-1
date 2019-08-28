@@ -15,7 +15,8 @@ function App() {
       <div className="App">
         <Route exact path="/" component={Login} />
         <Route path="/sign-up" component={SignUp}/>
-        <Route path='/seller' component={SellerOverview}/>
+        <Route path='/seller/:userid/auctions' component={SellerOverview}/>
+        <Route path='/seller/:userid/products' component={SellerOverview}/>
       </div>
     </Router>
   );

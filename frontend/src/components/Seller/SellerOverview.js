@@ -1,24 +1,42 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-// import{actions} from '../store/actions'
+import {getSeller} from '../store/actions' 
 import FormikAddAuction from './AddAuction.js'
+import axiosWithAuth from '../utils/axiosWithAuth.js';
 
 const SellerOverview = (props) => {
-    const deleteAuction = id => {
-        props.deleteAuction(id);
-    };
-
-    const editAuction = id => {
-      props.editAuction(id);
-    };
 
     return (
-        <>
+        <div>
         <h1>Seller Profile</h1>
+            <div>
             <h2>Auctions:</h2>
+                <button onClick={() => {props.getSeller()}}> See Your Auctions </button>
+                {props.auctions ? (
+                props.auctions.map(auction => (
+                <div className="auctions" key={auction.auction_name}>
+                    <h4>Auction: {auction.auction_name}</h4>
+                    <h4>Start Time: {auction.start_time}</h4>
+                    <h4>Starting Bid: {auction.starting_bid}</h4>
+                    {/* <Button onClick={() => props.deleteAuction(auction.id)}>Smurf Left the Village</Button> */}
+                </div>
+                ))
+            ) : (
+                <h1> Page is loading, please wait...</h1>
+            )}
+            </div>
                 <FormikAddAuction addAuction={props.addAuction} />
-        </>
+        </div>
     )
 }
 
-export default SellerOverview;
+const mapStateToProps = state => {
+    return {
+      auctions: state.auctions
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    {getSeller}
+)(SellerOverview);

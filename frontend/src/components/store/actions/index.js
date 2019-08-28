@@ -37,10 +37,10 @@ export const DELETE_PRODUCT_SUCCESS = "DELETE_PRODUCT_SUCCESS";
 export const DELETE_PRODUCT_FAIL = "DELETE_PRODUCT_FAIL";
 
 //Axios for Seller Page
-export const getSeller = userid => dispatch => {
+export const getSeller = () => dispatch => {
   dispatch({ type: GET_SELLER });
   axiosWithAuth()
-    .get(`https://silent-auction-api.herokuapp.com/seller/${userid}/auctions`)
+    .get(`https://silent-auction-api.herokuapp.com/seller/1/auctions`)
     .then(res => {
       console.log(res.data);
       dispatch({
@@ -59,7 +59,7 @@ export const getSeller = userid => dispatch => {
 
 //Axios calls to backend for Seller auctions
 export const getSellerAuction = (userid, auctionid) => dispatch => {
-    dispatch({ type: FETCH_SELLER_AUCTION });
+    dispatch({ type: GET_SELLER_AUCTION });
     axiosWithAuth()
     .get(`https://silent-auction-api.herokuapp.com/seller/${userid}/auctions/${auctionid}`)
     .then(res => {
@@ -80,7 +80,7 @@ export const getSellerAuction = (userid, auctionid) => dispatch => {
 
 export const addAuction = (userid, newAuction) => dispatch => {
   dispatch({ type: POSTING_NEW_AUCTION });
-  axios
+  axiosWithAuth()
     .post(`https://silent-auction-api.herokuapp.com/seller/${userid}/auctions`, newAuction)
     .then(res => {
       console.log("POST data", res);
@@ -101,7 +101,7 @@ export const addAuction = (userid, newAuction) => dispatch => {
 
 export const deleteAuction = (userid, auctionid) => dispatch => {
   dispatch({ type: DELETE_AUCTION });
-  axios
+  axiosWithAuth()
     .delete(`https://silent-auction-api.herokuapp.com/seller/${userid}/auctions/${auctionid}`)
     .then(res => {
       console.log(res);
@@ -121,7 +121,7 @@ export const deleteAuction = (userid, auctionid) => dispatch => {
 
 export const editAuction = (userid, auctionid) => dispatch => {
   dispatch({ type: EDIT_AUCTION });
-  axios
+  axiosWithAuth()
     .put(`https://silent-auction-api.herokuapp.com/seller/${userid}/auctions/${auctionid}`)
     .then(res => {
       console.log(res);
@@ -162,7 +162,7 @@ export const getAllProducts = userid => dispatch => {
   };
 
 export const getSellerProduct = (userid, productid) => dispatch => {
-    dispatch({ type: FETCH_SELLER_PRODUCT });
+    dispatch({ type: GET_SELLER_PRODUCT });
     axiosWithAuth()
     .get(`https://silent-auction-api.herokuapp.com/seller/${userid}/products/${productid}`)
     .then(res => {
@@ -183,7 +183,7 @@ export const getSellerProduct = (userid, productid) => dispatch => {
 
 export const addProduct = (userid, newProduct) => dispatch => {
   dispatch({ type: POSTING_NEW_PRODUCT });
-  axios
+  axiosWithAuth()
     .post(`https://silent-auction-api.herokuapp.com/seller/${userid}/products`, newProduct)
     .then(res => {
       console.log("POST data", res);
@@ -204,7 +204,7 @@ export const addProduct = (userid, newProduct) => dispatch => {
 
 export const deleteProduct = (userid, productid) => dispatch => {
   dispatch({ type: DELETE_PRODUCT });
-  axios
+  axiosWithAuth()
     .delete(`https://silent-auction-api.herokuapp.com/seller/${userid}/products/${productid}`)
     .then(res => {
       console.log(res);
