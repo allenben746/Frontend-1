@@ -81,7 +81,7 @@ export const getSellerAuction = (userid, auctionid) => dispatch => {
 export const addAuction = (userid, newAuction) => dispatch => {
   dispatch({ type: POSTING_NEW_AUCTION });
   axiosWithAuth()
-    .post(`https://silent-auction-api.herokuapp.com/seller/${userid}/auctions`, newAuction)
+    .post(`https://silent-auction-api.herokuapp.com/seller/1/auctions`, newAuction)
     .then(res => {
       console.log("POST data", res);
       dispatch({
