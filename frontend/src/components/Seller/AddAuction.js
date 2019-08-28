@@ -40,11 +40,12 @@ function AddAuction({values, addAuctionItem}) {
 }
 
 const FormikAddAuction = withFormik({
-  mapPropsToValues({ auction_name, auction_description, start_time }) {
+  mapPropsToValues({ auction_name, auction_description, start_time, end_time }) {
     return {
       auction_name: auction_name || "",
       auction_description: auction_description || "",
-      start_time: start_time || "2019-08-12T00:00:00.000Z",
+      start_time: start_time || "YYYY-MM-DDT00:00:00.000Z",
+      end_time: end_time || "YYYY-MM-DDT00:00:00.000Z"
     };
   },
   handleSubmit(values, { resetForm, props }) {
