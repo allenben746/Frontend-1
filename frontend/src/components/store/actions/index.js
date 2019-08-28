@@ -102,7 +102,7 @@ export const addAuction = (userid, newAuction) => dispatch => {
 export const deleteAuction = (userid, auctionid) => dispatch => {
   dispatch({ type: DELETE_AUCTION });
   axiosWithAuth()
-    .delete(`https://silent-auction-api.herokuapp.com/seller/${userid}/auctions/${auctionid}`)
+    .delete(`https://silent-auction-api.herokuapp.com/seller/1/auctions/${auctionid}`)
     .then(res => {
       console.log(res);
       dispatch({

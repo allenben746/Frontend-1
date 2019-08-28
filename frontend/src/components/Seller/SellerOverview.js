@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {getSeller} from '../store/actions' 
+import {getSeller, deleteAuction} from '../store/actions' 
 import FormikAddAuction from './AddAuction.js'
 import axiosWithAuth from '../utils/axiosWithAuth.js';
 
@@ -17,8 +17,9 @@ const SellerOverview = (props) => {
                 <div className="auctions" key={auction.auction_name}>
                     <h4>Auction: {auction.auction_name}</h4>
                     <h4>Start Time: {auction.start_time}</h4>
+                    <h4>End Time: {auction.end_time}</h4>
                     <h4>Starting Bid: {auction.starting_bid}</h4>
-                    {/* <Button onClick={() => props.deleteAuction(auction.id)}>Delete Auction</Button> */}
+                    <button onClick={() => props.deleteAuction(auction.id)}>Delete Auction</button>
                 </div>
                 ))
             ) : (
@@ -38,5 +39,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    {getSeller}
+    {getSeller, deleteAuction}
 )(SellerOverview);
