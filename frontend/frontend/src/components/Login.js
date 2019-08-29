@@ -33,7 +33,7 @@ const Login = ({ errors, touched, values, status }) => {
             </Form>
 
             {users && users.map(user => (
-                <ul key={userid}>
+                <ul key={user.id}>
                     <li>username: {user.username}</li>
                     <li>password: {user.password}</li>
                     {/* <li>auction_number: {user.auction_number}</li>

@@ -1,6 +1,6 @@
 import Auction from './components/Auction';
 import './App.css';
-import Login from './components/Login';
+import LoginAuth from './components/redux/LoginAuth';
 import AuctionList from './components/AuctionList';
 import { Route, NavLink, Link } from 'react-router-dom';
 import data from './components/data';
@@ -25,7 +25,7 @@ function App() {
         <ul className="tab-bar">
           <li className="Home"><a href="https://silentauction.netlify.com/">Home</a></li>
           <li>
-            <NavLink exact to="/login" activeClassName="activeNavButton">
+            <NavLink exact to="/loginauth" activeClassName="activeNavButton">
               Login
                   </NavLink>
           </li>
@@ -39,10 +39,10 @@ function App() {
 
 
 
-      <Route exact path="/login" component={Login} />
+      <Route exact path="/loginauth" component={LoginAuth} />
 
       <Route exact path="/bidder" component={AuctionList} />
-      <Route path="/auctions/:auctionid" component={Auction} />
+      <Route path="/auctions/:id" component={Auction} />
 
 
       <main>

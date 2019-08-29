@@ -32,7 +32,7 @@ const AuctionList = (props) => {
     return (
         <div className="auction-list">
             {auction && auction.map(auction => (
-                <AuctionDetails key={auctionid} auction={auction} />
+                <AuctionDetails key={auction.id} auction={auction} />
             ))}
 
         </div>
@@ -40,9 +40,9 @@ const AuctionList = (props) => {
 }
 
 function AuctionDetails({ auction }) {
-    const { auction_name, auction_description, start_time, end_time, starting_bid } = auction;
+    const { auction_name, image, auction_description, start_time, end_time, starting_bid } = auction;
     return (
-        <Link to={`/auctions/${auctionid}`}>
+        <Link to={`/auctions/${auction.id}`}>
             <div className="auction-card">
                 <h2>{auction_name}</h2>
                 <div className="product">
