@@ -8,7 +8,7 @@ import { Route, Redirect } from 'react-router-dom';
 const Bidders = (props) => {
     const [bidderList, setBidderList] = useState([]);
     const getBidders = () => {
-        axiosWithAuth().get('http://localhost:9000/bidder/:userid/bids')
+        axiosWithAuth().get('https://silent-auction-api.herokuapp.com/auth/register')
             .then(res => {
                 setBidderList(res.data);
             })
@@ -20,12 +20,12 @@ const Bidders = (props) => {
     }, []);
 
     const addBidder = bidder => {
-        axiosWithAuth().post('http://localhost:9000/bidder/:userid/bids/:auctionid', bidder)
+        axiosWithAuth().post('https://silent-auction-api.herokuapp.com/bidder/:userid/bids/:auctionid', bidder)
             .then(res => setBidderList(res.data))
             .catch(err => console.log(err.response));
     };
     const editBidder = bidder => {
-        axiosWithAuth().put('https://jsonplaceholder.typicode.com/posts/1', bidder)
+        axiosWithAuth().put('https://silent-auction-api.herokuapp.com/bidder/:userid/bids/:auctionid', bidder)
             .then(res => {
                 setBidderList(res.data);
                 props.history.push("/bidders");
@@ -34,7 +34,7 @@ const Bidders = (props) => {
     };
 
     const deleteBidder = id => {
-        axiosWithAuth().delete(`http://localhost:5000/api/friends/${id}`)
+        axiosWithAuth().delete()
             .then(res => setBidderList(res.data))
             .catch(err => console.log(err.response));
     };
