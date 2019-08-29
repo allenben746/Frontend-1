@@ -1,4 +1,4 @@
-import AuctionPage from './components/AuctionPage';
+import Auction from './components/Auction';
 import './App.css';
 import Login from './components/Login';
 import AuctionList from './components/AuctionList';
@@ -7,7 +7,7 @@ import data from './components/data';
 import React, { useState } from "react";
 import Bidder from "./components/Bidders";
 
-function App(data) {
+function App() {
   const [notes, setNotes] = useState(data);
   const addNewNote = note => {
     setNotes([...notes, note]);
@@ -19,7 +19,7 @@ function App(data) {
   // const { auction } = {}
   return (
     <div className="App">
-
+      <h1>Silent Auction</h1>
       <nav>
 
         <ul className="tab-bar">
@@ -42,7 +42,7 @@ function App(data) {
       <Route exact path="/login" component={Login} />
 
       <Route exact path="/bidder" component={AuctionList} />
-      <Route path="/auctionpage" component={AuctionPage} />
+      <Route path="/auctions/:auctionid" component={Auction} />
 
 
       <main>
@@ -51,6 +51,7 @@ function App(data) {
 
         <AuctionList addNewNote={addNewNote} />
       </main>
+
     </div >
     // <Route path="/bidder" component={AuctionList} />
     // <Route exact path="/auctionpage" component={AuctionPage} />

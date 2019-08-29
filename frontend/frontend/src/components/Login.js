@@ -2,6 +2,7 @@ import { Form, Field, withFormik } from 'formik';
 import * as Yup from "yup";
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import axiosWithAuth from './utils/axiosWithAuth';
 
 const Login = ({ errors, touched, values, status }) => {
     const [users, setUsers] = useState([]);
@@ -32,7 +33,7 @@ const Login = ({ errors, touched, values, status }) => {
             </Form>
 
             {users && users.map(user => (
-                <ul key={user.id}>
+                <ul key={userid}>
                     <li>username: {user.username}</li>
                     <li>password: {user.password}</li>
                     {/* <li>auction_number: {user.auction_number}</li>
@@ -60,7 +61,7 @@ const FormikLogin = withFormik({
     }),
 
     handleSubmit(values, { setStatus }) {
-        axios.post("https://silent-auction-api.herokuapp.com/auth/login", values).then(res => {
+        axios.post("https://silent-auction-api.herokuapp.com/bidder/:userid/bids/:auctionid", values).then(res => {
             console.log(res);
             setStatus(res.data);
         });

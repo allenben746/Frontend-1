@@ -13,7 +13,7 @@ const AuctionList = (props) => {
 
 
 
-        axios.get("https://silent-auction-api.herokuapp.com/bidder/auctions")
+        axios.get("https://silent-auction-api.herokuapp.com/bidder/auctions/:auctionid/bids")
             .then(res => {
 
                 const items = res.data;
@@ -32,7 +32,7 @@ const AuctionList = (props) => {
     return (
         <div className="auction-list">
             {auction && auction.map(auction => (
-                <AuctionDetails key={auction.id} auction={auction} />
+                <AuctionDetails key={auctionid} auction={auction} />
             ))}
 
         </div>
@@ -40,21 +40,22 @@ const AuctionList = (props) => {
 }
 
 function AuctionDetails({ auction }) {
-    const { auction_name, image, product_id, auction_description, starting_bid, end_time } = auction;
+    const { auction_name, auction_description, start_time, end_time, starting_bid } = auction;
     return (
-        <Link to={`/auctions/${auction.id}`}>
+        <Link to={`/auctions/${auctionid}`}>
             <div className="auction-card">
                 <h2>{auction_name}</h2>
                 <div className="product">
 
                     <img src={image} alt="" />
-                    <p>{product_id}</p>
+
                     <p>{auction_description}</p>
                 </div>
                 <div className="bid">
                     <h3>Bidder</h3>
-                    <p>{starting_bid}</p>
+                    <p>{start_time}</p>
                     <p>{end_time}</p>
+                    <p>{starting_bid}</p>
                     <button className="bidnow">Bid Now</button>
                     {/* {bidder && bidder.map(item => (
                     <div key={bidder} className="bidder">

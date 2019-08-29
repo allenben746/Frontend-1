@@ -50,6 +50,7 @@ main {
 }
 nav {
 	width: 100%;
+	margin: 3px 180px;
 }
 
 .auction-page {

@@ -12,7 +12,7 @@ const Auction = (props) => {
         // You will NEED to add a dependency array to this effect hook
 
         axios
-            .get(data)
+            .get('https://silent-auction-api.herokuapp.com/bidder/auctions')
             .then(response => {
                 setAuction(response.data);
             })
@@ -24,21 +24,23 @@ const Auction = (props) => {
     if (!auction) {
         return <div>Loading auction information...</div>;
     }
-    const { title, username, image, product, description, bid } = auction;
+    const { auction_name, auction_description, start_time, end_time, starting_bid, product_id } = auction;
     return (
 
         <div className="auction-card">
-            <h1>{title}</h1>
-            <h2>{username}</h2>
-            <div className="product">
+            <h1>{auction_name}</h1>
 
-                image:{image}
-                Product:{product}
-                description:{description}
+            <div className="product">
+                <img src="{image}" alt="image" />
+                <p>{auction_description}</p>
+                <p>{product_id}</p>
+
             </div>
             <div className="bid">
                 <h3>Bidder</h3>
-                <p>{bid}</p>
+                <p>{start_time}</p>
+                <p>{end_time}</p>
+                <p>{starting_bid}</p>
                 <button>Place bid Now</button>
                 {/* {bidder && bidder.map(item => (
                       <div key={bidder} className="bidder">
