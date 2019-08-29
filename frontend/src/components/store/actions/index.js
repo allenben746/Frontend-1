@@ -185,15 +185,15 @@ export const deleteAuction = (deleteAuctionId) => dispatch => {
     });
 };
 
-export const editAuction = (userid, auctionid) => dispatch => {
+export const editAuction = (editAuctionId, userid) => dispatch => {
   dispatch({ type: EDIT_AUCTION });
   axiosWithAuth()
-    .put(`https://silent-auction-api.herokuapp.com/seller/1/auctions/${auctionid}`)
+    .put(`https://silent-auction-api.herokuapp.com/seller/1/auctions/${editAuctionId}`)
     .then(res => {
       console.log(res);
       dispatch({
         type: EDIT_AUCTION_SUCCESS,
-        payload: res.data
+        payload: editAuctionId,
       });
     })
     .catch(err => {

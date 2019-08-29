@@ -1,11 +1,18 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {getSeller, getSellerProducts, addAuction, addProduct, deleteProduct, deleteAuction} from '../store/actions' 
+import {getSeller, getSellerProducts, addAuction, editAuction, addProduct, deleteProduct, deleteAuction} from '../store/actions' 
 import FormikAddAuction from './AddAuction.js'
 import axiosWithAuth from '../utils/axiosWithAuth.js';
 import FormikAddItemForm from './AddItemForm.js';
 
 const SellerOverview = (props) => {
+
+    const [activeAuction, setActiveAuction] = useState(null);
+
+    const selectAuction = (event, auction) => {
+        // event.preventDefault();
+        setActiveAuction(auction)
+      }
 
     return (
         <div>
@@ -24,7 +31,7 @@ const SellerOverview = (props) => {
             ) : (
                 <h1> Page is loading, please wait...</h1>
             )}
-            <FormikAddItemForm addProduct={props.addProduct} />
+            <FormikAddItemForm addProduct={props.addProduct} editAuction={editAuction} activeAuction={activeAuction} />
 
             <h2>Auctions:</h2>
                 
@@ -36,6 +43,7 @@ const SellerOverview = (props) => {
                     <h4>Start Time: {auction.start_time}</h4>
                     <h4>End Time: {auction.end_time}</h4>
                     <h4>Starting Bid: {auction.starting_bid}</h4>
+                    <button onClick={() => selectAuction(auction.id)}>Edit Auction</button>
                     <button onClick={() => props.deleteAuction(auction.id)}>Delete Auction</button>
                 </div>
                 ))
@@ -56,5 +64,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    {getSellerProducts, addProduct, getSeller, addAuction, deleteProduct, deleteAuction}
+    {getSellerProducts, addProduct, getSeller, addAuction, editAuction, deleteProduct, deleteAuction}
 )(SellerOverview);
