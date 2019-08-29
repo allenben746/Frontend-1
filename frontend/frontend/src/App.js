@@ -6,6 +6,7 @@ import { Route, NavLink, Link } from 'react-router-dom';
 import data from './components/data';
 import React, { useState } from "react";
 import Bidder from "./components/Bidders";
+import RegisterPage from './components/redux/RegisterPage';
 
 function App() {
   const [notes, setNotes] = useState(data);
@@ -40,8 +41,8 @@ function App() {
 
 
       <Route exact path="/loginauth" component={LoginAuth} />
-
-      <Route exact path="/bidder" component={AuctionList} />
+      <Route path="/register" component={RegisterPage} />
+      <Route exact path="/bidder" component={Bidder} />
       <Route path="/auctions/:id" component={Auction} />
 
 

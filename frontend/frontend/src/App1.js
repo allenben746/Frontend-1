@@ -1,44 +1,55 @@
 import React from 'react';
-import './App.css';
-import Login from './components/Login';
-import { Route, Link, Redirect } from 'react-router-dom';
-// import BidderForm from './components/BidderForm';
-import Bidders from './components/Bidders';
+import { Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
-    // const propsWithoutComponent = {...props, component: undefined};
-    return <Route{...rest} render={props => {
-        if (localStorage.getItem('token')) {
-            return <Component{...props} />;
-        } else {
-            return <Redirect to="/login" />;
-        }
+import { history } from '../_helpers';
+import { alertActions } from '../_actions';
+import { PrivateRoute } from './components/redux/Privateroute';
+import { HomePage } from '../HomePage';
+import { LoginAuth } from '../LoginAuth';
+import { RegisterPage } from '../RegisterPage';
 
-    }} />
+class App extends React.Component {
+    constructor(props) {
+        super(props);
 
-};
-
-
-const protectRoute = Component => props => {
-    if (localStorage.getItem('token')) {
-        return <Component {...props} />;
-    } else {
-        return <Redirect to="/login" />;
+        history.listen((location, action) => {
+            // clear alert on location change
+            this.props.clearAlerts();
+        });
     }
-};
-const ProtectedBidders = protectRoute(Bidders);
 
-function App() {
-
-    return (
-        <div className="App">
-            <Route path="/login" component={Login} />
-            <ProtectedRoute path='/bidders' component={Bidders} />
-            {/* <ProtectedRoute path="/bidders" component={Bidder} /> */}
-            <Route path="/bidders" component={protectRoute(Bidders)} />
-        </div>);
+    render() {
+        const { alert } = this.props;
+        return (
+            <div className="jumbotron">
+                <div className="container">
+                    <div className="col-sm-8 col-sm-offset-2">
+                        {alert.message &&
+                            <div className={`alert ${alert.type}`}>{alert.message}</div>
+                        }
+                        <Router history={history}>
+                            <div>
+                                <PrivateRoute exact path="/" component={HomePage} />
+                                <Route path="/login" component={LoginPage} />
+                                <Route path="/register" component={RegisterPage} />
+                            </div>
+                        </Router>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
+function mapState(state) {
+    const { alert } = state;
+    return { alert };
+}
 
+const actionCreators = {
+    clearAlerts: alertActions.clear
+};
 
-export default App;
+const connectedApp = connect(mapState, actionCreators)(App);
+export { connectedApp as App };
