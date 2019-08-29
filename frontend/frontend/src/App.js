@@ -1,13 +1,16 @@
-import AuctionPage from './components/AuctionPage';
+import Auction from './components/Auction';
 import './App.css';
-import Login from './components/Login';
+import LoginAuth from './components/redux/LoginAuth';
 import AuctionList from './components/AuctionList';
 import { Route, NavLink, Link } from 'react-router-dom';
 import data from './components/data';
 import React, { useState } from "react";
 import Bidder from "./components/Bidders";
+import RegisterPage from './components/redux/RegisterPage';
+import Modal from './extra/Modal';
+import "/Users/nerissataylor/Frontend/frontend/frontend/src/extra/settings.scss";
 
-function App(data) {
+function App() {
   const [notes, setNotes] = useState(data);
   const addNewNote = note => {
     setNotes([...notes, note]);
@@ -19,13 +22,13 @@ function App(data) {
   // const { auction } = {}
   return (
     <div className="App">
-
+      <h1>Silent Auction</h1>
       <nav>
 
         <ul className="tab-bar">
           <li className="Home"><a href="https://silentauction.netlify.com/">Home</a></li>
           <li>
-            <NavLink exact to="/login" activeClassName="activeNavButton">
+            <NavLink exact to="/loginauth" activeClassName="activeNavButton">
               Login
                   </NavLink>
           </li>
@@ -39,10 +42,10 @@ function App(data) {
 
 
 
-      <Route exact path="/login" component={Login} />
-
-      <Route exact path="/bidder" component={AuctionList} />
-      <Route path="/auctionpage" component={AuctionPage} />
+      <Route exact path="/loginauth" component={LoginAuth} />
+      <Route path="/register" component={RegisterPage} />
+      <Route exact path="/bidder" component={Bidder} />
+      <Route path="/auctions/:id" component={Auction} />
 
 
       <main>
@@ -51,7 +54,10 @@ function App(data) {
 
         <AuctionList addNewNote={addNewNote} />
       </main>
-    </div >
+
+      <Modal />
+
+    </div>
     // <Route path="/bidder" component={AuctionList} />
     // <Route exact path="/auctionpage" component={AuctionPage} />
     // <Bidder />
