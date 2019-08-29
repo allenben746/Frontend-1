@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BidderCard from './BidderCard';
 import BidderForm from './BidderForm';
-import axiosWithAuth from './utils/axiosWithAuth';
+import axiosWithAuth from '../../frontend/src/components/utils/axiosWithAuth';
 import { Route, Redirect } from 'react-router-dom';
 
 

@@ -18,14 +18,16 @@ import {
     DELETE_PRODUCT, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAIL,
 } from "../actions";
   
+
   const initialState = {
-    auctions: [],
     products: [],
+    auctions: [],
     error: "",
     isFetching: false
   };
   
   export const reducer = (state = initialState, action) => {
+    console.log(action);
     switch (action.type) {
       case GET_SELLER:
         return {
@@ -46,6 +48,26 @@ import {
           error: "",
           auctions: action.payload
         };
+
+        case GET_SELLER_PRODUCTS:
+          return {
+            ...state,
+            isFetching: true,
+            error: ""
+          };
+        case GET_SELLER_PRODUCTS_FAIL:
+          return {
+            ...state,
+            isFetching: false,
+            error: action.payload
+          };
+        case GET_SELLER_PRODUCTS_SUCCESS:
+          return {
+            ...state,
+            isFetching: false,
+            error: "",
+            products: action.payload
+          };
 
         case GET_SELLER_AUCTION:
           return {
@@ -80,11 +102,53 @@ import {
         };
       case POST_NEW_AUCTION_SUCCESS:
         return {
+          ...state,
           isFetching: false,
           error: "",
-          auctions: action.payload
+          auctions: [...state.auctions, action.payload]
         };
 
+      
+      case POSTING_NEW_PRODUCT:
+        return {
+          ...state,
+          isFetching: true,
+          error: ""
+        };
+      case POST_NEW_PRODUCT_FAIL:
+        return {
+          ...state,
+          isFetching: false,
+          error: action.payload
+        };
+      case POST_NEW_PRODUCT_SUCCESS:
+        return {
+          ...state,
+          isFetching: false,
+          error: "",
+          products: [...state.products, action.payload]
+        };
+      
+      case DELETE_PRODUCT:
+        return {
+          ...state,
+          isFetching: true,
+          error: ""
+        };
+      case DELETE_PRODUCT_FAIL:
+        return {
+          ...state,
+          isFetching: false,
+          error: action.payload
+        };
+      case DELETE_PRODUCT_SUCCESS:
+        return {
+          ...state,
+          isFetching: false,
+          error: "",
+          products: state.products.filter((product) => (product.id !== action.payload))
+        };
+    
       case DELETE_AUCTION:
         return {
           ...state,
@@ -99,9 +163,10 @@ import {
         };
       case DELETE_AUCTION_SUCCESS:
         return {
+          ...state,
           isFetching: false,
           error: "",
-          auctions: action.payload
+          auctions: state.auctions.filter((auction) => (auction.id !== action.payload))
         };
 
         case EDIT_AUCTION:

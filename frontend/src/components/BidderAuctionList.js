@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 
 import { Link } from 'react-router-dom';
+import axiosWithAuth from '../../frontend/src/components/utils/axiosWithAuth';
 
 
-const AuctionList = () => {
+const BidderAuctionList = () => {
 
     const [auction, setAuction] = useState();
 
@@ -74,4 +75,4 @@ function AuctionDetails({ auction }) {
 
 }
 
-export default AuctionList;
+export default BidderAuctionList;
