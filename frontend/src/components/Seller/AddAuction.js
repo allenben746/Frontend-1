@@ -32,7 +32,7 @@ function AddAuction({values, addAuctionItem, productId}) {
       <label>Starting Bid: $</label>
         <Field name="starting_bid" type="number" placeholder="Price" />
       </div>
-      <button type="submit">Add Auction</button>
+      <button type="submit">Create Auction</button>
     </Form>
     </>
   );
