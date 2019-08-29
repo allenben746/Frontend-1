@@ -1,4 +1,9 @@
+import axios from "axios";
 import axiosWithAuth from '../../utils/axiosWithAuth.js'
+
+export const POST_LOGIN_START = "POST_LOGIN_START";
+export const POST_LOGIN_SUCCESS = "POST_LOGIN_SUCCESS";
+export const POST_LOGIN_FAIL = "POST_LOGIN_FAIL";
 
 export const GET_SELLER = "GET_SELLER";
 export const GET_SELLER_SUCCESS = "GET_SELLER_SUCCESS";
@@ -35,6 +40,22 @@ export const POST_NEW_PRODUCT_FAIL = "POST_NEW_PRODUCT_FAIL";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const DELETE_PRODUCT_SUCCESS = "DELETE_PRODUCT_SUCCESS";
 export const DELETE_PRODUCT_FAIL = "DELETE_PRODUCT_FAIL";
+
+
+//Axios call for redirect after login
+export const login = (creds, history) => dispatch => {
+  dispatch({ type: POST_LOGIN_START})
+  axios
+      .post(`https://bizrecommendations.herokuapp.com/api/auth/login`, creds)
+      .then(res => {
+          dispatch({ type: POST_LOGIN_SUCCESS })
+          localStorage.setItem('token', res.data.token)
+          history.push('/listings')
+      })
+      .catch(err => {
+          dispatch({ type: POST_LOGIN_FAIL, payload: err.response.data.error})
+      })
+}
 
 //Axios for Seller Page
 export const getSeller = () => dispatch => {
