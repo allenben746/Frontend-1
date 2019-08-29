@@ -7,6 +7,8 @@ import data from './components/data';
 import React, { useState } from "react";
 import Bidder from "./components/Bidders";
 import RegisterPage from './components/redux/RegisterPage';
+import Modal from './extra/Modal';
+import "/Users/nerissataylor/Frontend/frontend/frontend/src/extra/settings.scss";
 
 function App() {
   const [notes, setNotes] = useState(data);
@@ -53,7 +55,9 @@ function App() {
         <AuctionList addNewNote={addNewNote} />
       </main>
 
-    </div >
+      <Modal />
+
+    </div>
     // <Route path="/bidder" component={AuctionList} />
     // <Route exact path="/auctionpage" component={AuctionPage} />
     // <Bidder />

@@ -1,7 +1,8 @@
 import React from 'react';
 import AuctionList from './AuctionList';
+import data from './data';
 
-const AuctionPage = () => {
+const AuctionPage = (data) => {
     return (
         <div className="auction-page">
             <h1>Auction Page</h1>

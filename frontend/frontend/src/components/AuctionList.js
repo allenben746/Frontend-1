@@ -5,7 +5,8 @@ import axios from 'axios';
 
 import { Link } from 'react-router-dom';
 
-const AuctionList = (props) => {
+
+const AuctionList = () => {
 
     const [auction, setAuction] = useState();
 
@@ -14,6 +15,7 @@ const AuctionList = (props) => {
 
 
         axios.get("https://silent-auction-api.herokuapp.com/bidder/auctions/:auctionid/bids")
+
             .then(res => {
 
                 const items = res.data;

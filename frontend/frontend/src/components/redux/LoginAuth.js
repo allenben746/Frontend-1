@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
 export function authHeader() {
     // return authorization header with jwt token
     let user = JSON.parse(localStorage.getItem('user'));
@@ -33,16 +34,19 @@ function LoginAuth({ history }) {
 
     return (
 
+
         <form onSubmit={handleSubmit}>
             <input type="text"
                 name="username"
                 value={creds.username}
+                placeholder="username"
                 onChange={handleChange}
             />
             <input
                 type="password"
                 name="password"
                 value={creds.password}
+                placeholder="password"
                 onChange={handleChange} />
             <button type="submit">Log in</button>
         </form>
