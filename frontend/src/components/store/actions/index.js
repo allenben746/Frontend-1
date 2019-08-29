@@ -58,6 +58,29 @@ export const getSellerProducts = () => dispatch => {
     });
 };
 
+export const addProduct = (newProduct, userid) => dispatch => {
+  dispatch({ type: POSTING_NEW_PRODUCT });
+  console.log('new product', newProduct, userid );
+  axiosWithAuth()
+    .post(`https://silent-auction-api.herokuapp.com/seller/1/products`, {...newProduct})
+    .then(res => {
+      console.log("POST data", res);
+      dispatch({
+        type: POST_NEW_PRODUCT_SUCCESS,
+        payload: newProduct
+      });
+    })
+    .catch(err => {
+      console.log("Rejected, newAuction", err);
+      console.log(newProduct);
+      dispatch({
+        type: POST_NEW_PRODUCT_FAIL,
+        payload: err.data
+      });
+    });
+};
+
+
 
 export const getSeller = () => dispatch => {
   dispatch({ type: GET_SELLER });
@@ -164,26 +187,6 @@ export const editAuction = (userid, auctionid) => dispatch => {
 
 //Axios calls to backend for Seller auction Products
 
-export const getAllProducts = userid => dispatch => {
-    dispatch({ type: GET_SELLER_PRODUCTS });
-    axiosWithAuth()
-      .get(`https://silent-auction-api.herokuapp.com/seller/${userid}/products`)
-      .then(res => {
-        console.log(res.data);
-        dispatch({
-          type: GET_SELLER_PRODUCTS_SUCCESS,
-          payload: res.data
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        dispatch({
-          type: GET_SELLER_PRODUCTS_FAIL,
-          payload: err.response
-        });
-      });
-  };
-
 export const getSellerProduct = (userid, productid) => dispatch => {
     dispatch({ type: GET_SELLER_PRODUCT });
     axiosWithAuth()
@@ -201,27 +204,6 @@ export const getSellerProduct = (userid, productid) => dispatch => {
           type: GET_SELLER_PRODUCT_FAIL,
           payload: err.response
         });
-    });
-};
-
-export const addProduct = (userid, newProduct) => dispatch => {
-  dispatch({ type: POSTING_NEW_PRODUCT });
-  axiosWithAuth()
-    .post(`https://silent-auction-api.herokuapp.com/seller/${userid}/products`, newProduct)
-    .then(res => {
-      console.log("POST data", res);
-      dispatch({
-        type: POST_NEW_PRODUCT_SUCCESS,
-        payload: res.data
-      });
-    })
-    .catch(err => {
-      console.log("Rejected, newProduct", err);
-      console.log(newProduct);
-      dispatch({
-        type: POST_NEW_PRODUCT_FAIL,
-        payload: err.data
-      });
     });
 };
 

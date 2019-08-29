@@ -32,7 +32,6 @@ function AddAuction({values, addAuctionItem}) {
       <label>Starting Bid: $</label>
         <Field name="starting_bid" type="number" placeholder="Price" />
       </div>
-      <FormikAddItemForm values={values} addAuctionItem={addAuctionItem} />
       <button type="submit">Add Auction</button>
     </Form>
     </>

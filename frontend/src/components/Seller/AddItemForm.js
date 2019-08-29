@@ -1,56 +1,37 @@
 import React, {useState} from "react";
-import { Field, FieldArray } from "formik";
+import { withFormik, Form, Field } from "formik";
 
-function AddItemForm({values}) {
-  const [showItemForm, setShowItemForm] = useState(false);
+function AddItemForm() {
+  const [showForm, setShowForm] = useState(false);
 
-  if(!showItemForm){return(
-    <button onClick={() => setShowItemForm(true)}>Add Items</button>
+  if(!showForm){return(
+    <button onClick={() => setShowForm(true)}>Add a Product</button>
   )}
-
   return (
     <>
-    <h5>Items to Auction</h5>
-      <FieldArray
-            name="items"
-            render={arrayHelpers => (
-              <div>
-                {values.items && values.items.length > 0 ? (
-                  values.items.map((item, index) => (
-                    <div key={index}>
-                      <div>
-                        <Field name={`items.${index}`} placeholder="Item" />
-                      </div>
-                      <div>
-                        <Field name="initialprice" type="text" placeholder="Initial Price"/>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => arrayHelpers.remove(index)}
-                      >
-                        -
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => arrayHelpers.insert(index, '')}
-                      >
-                        +
-                      </button>
-                    </div>
-                  ))
-                ) : (
-                  <button type="button" onClick={() => arrayHelpers.push('')}>
-                    Add an Item
-                  </button>
-                )}
-                <div>
-                  <button type="submit">Submit</button>
-                </div>
-              </div>
-            )}
-          />
+    <h3>Add a Product</h3>
+    <Form>
+      <div>
+        <label>Name: </label>
+        <Field name="product_name" type="text" placeholder="Product Name" />
+      </div>
+      <button type="submit">Add Product</button>
+    </Form>
     </>
   );
 }
 
-export default AddItemForm;
+const FormikAddItemForm = withFormik({
+  mapPropsToValues({ product_name }) {
+    return {
+      product_name: product_name || "",
+    };
+  },
+  handleSubmit(values, { resetForm, props }) {
+    console.log('values', values);
+    props.addProduct(values);
+    resetForm();
+  }
+})(AddItemForm);
+
+export default FormikAddItemForm;

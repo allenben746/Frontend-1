@@ -108,6 +108,27 @@ import {
           auctions: [...state.auctions, action.payload]
         };
 
+        case POSTING_NEW_PRODUCT:
+          return {
+            ...state,
+            isFetching: true,
+            error: ""
+          };
+        case POST_NEW_PRODUCT_FAIL:
+          return {
+            ...state,
+            isFetching: false,
+            error: action.payload
+          };
+        case POST_NEW_PRODUCT_SUCCESS:
+          return {
+            ...state,
+            isFetching: false,
+            error: "",
+            products: [...state.products, action.payload]
+          };
+
+          
       case DELETE_AUCTION:
         return {
           ...state,
