@@ -10,9 +10,9 @@ const SellerOverview = (props) => {
     const [activeAuction, setActiveAuction] = useState(null);
 
     const selectAuction = (event, auction) => {
-        // event.preventDefault();
+        event.preventDefault();
         setActiveAuction(auction)
-      }
+    }
 
     return (
         <div>
