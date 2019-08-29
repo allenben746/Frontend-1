@@ -37,6 +37,28 @@ export const DELETE_PRODUCT_SUCCESS = "DELETE_PRODUCT_SUCCESS";
 export const DELETE_PRODUCT_FAIL = "DELETE_PRODUCT_FAIL";
 
 //Axios for Seller Page
+
+export const getSellerProducts = () => dispatch => {
+  dispatch({ type: GET_SELLER_PRODUCTS });
+  axiosWithAuth()
+    .get(`https://silent-auction-api.herokuapp.com/seller/1/products`)
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: GET_SELLER_PRODUCTS_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: GET_SELLER_PRODUCTS_FAIL,
+        payload: err.response
+      });
+    });
+};
+
+
 export const getSeller = () => dispatch => {
   dispatch({ type: GET_SELLER });
   axiosWithAuth()
@@ -61,7 +83,7 @@ export const getSeller = () => dispatch => {
 export const getSellerAuction = (userid, auctionid) => dispatch => {
     dispatch({ type: GET_SELLER_AUCTION });
     axiosWithAuth()
-    .get(`https://silent-auction-api.herokuapp.com/seller/${userid}/auctions/${auctionid}`)
+    .get(`https://silent-auction-api.herokuapp.com/seller/1/auctions/${auctionid}`)
     .then(res => {
         console.log(res.data);
         dispatch({
@@ -78,15 +100,16 @@ export const getSellerAuction = (userid, auctionid) => dispatch => {
     });
 };
 
-export const addAuction = (userid, newAuction) => dispatch => {
+export const addAuction = (newAuction, userid) => dispatch => {
   dispatch({ type: POSTING_NEW_AUCTION });
+  console.log('new auction', newAuction, userid );
   axiosWithAuth()
-    .post(`https://silent-auction-api.herokuapp.com/seller/1/auctions`, newAuction)
+    .post(`https://silent-auction-api.herokuapp.com/seller/1/auctions`, {...newAuction, product_id: 6})
     .then(res => {
       console.log("POST data", res);
       dispatch({
         type: POST_NEW_AUCTION_SUCCESS,
-        payload: res.data
+        payload: newAuction
       });
     })
     .catch(err => {
@@ -122,7 +145,7 @@ export const deleteAuction = (userid, auctionid) => dispatch => {
 export const editAuction = (userid, auctionid) => dispatch => {
   dispatch({ type: EDIT_AUCTION });
   axiosWithAuth()
-    .put(`https://silent-auction-api.herokuapp.com/seller/${userid}/auctions/${auctionid}`)
+    .put(`https://silent-auction-api.herokuapp.com/seller/1/auctions/${auctionid}`)
     .then(res => {
       console.log(res);
       dispatch({

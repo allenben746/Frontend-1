@@ -19,13 +19,14 @@ import {
 } from "../actions";
   
   const initialState = {
-    auctions: [],
     products: [],
+    auctions: [],
     error: "",
     isFetching: false
   };
   
   export const reducer = (state = initialState, action) => {
+    console.log(action);
     switch (action.type) {
       case GET_SELLER:
         return {
@@ -46,6 +47,26 @@ import {
           error: "",
           auctions: action.payload
         };
+
+        case GET_SELLER_PRODUCTS:
+          return {
+            ...state,
+            isFetching: true,
+            error: ""
+          };
+        case GET_SELLER_PRODUCTS_FAIL:
+          return {
+            ...state,
+            isFetching: false,
+            error: action.payload
+          };
+        case GET_SELLER_PRODUCTS_SUCCESS:
+          return {
+            ...state,
+            isFetching: false,
+            error: "",
+            products: action.payload
+          };
 
         case GET_SELLER_AUCTION:
           return {
@@ -80,9 +101,10 @@ import {
         };
       case POST_NEW_AUCTION_SUCCESS:
         return {
+          ...state,
           isFetching: false,
           error: "",
-          auctions: action.payload
+          auctions: [...state.auctions, action.payload]
         };
 
       case DELETE_AUCTION:
