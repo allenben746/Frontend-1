@@ -47,6 +47,7 @@ const FormikUserForm = withFormik({
         console.log("Logging in...", values);
         axios.post("https://silent-auction-api.herokuapp.com/api/auth/login", values)
         .then(res => {
+            localStorage.setItem("token", "tokenExample")
             setStatus(res.data)
             resetForm();
             console.log("Server response ->", res.data);
