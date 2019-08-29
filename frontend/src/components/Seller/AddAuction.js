@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { withFormik, Form, Field } from "formik";
 import FormikAddItemForm from './AddItemForm';
 
-function AddAuction({values, addAuctionItem}) {
+function AddAuction({values, addAuctionItem, productId}) {
   const [showForm, setShowForm] = useState(false);
 
   if(!showForm){return(
@@ -22,35 +22,35 @@ function AddAuction({values, addAuctionItem}) {
       </div>
       <div>
         <label>Start Time: </label>
-        <Field name="start_time" type="text" placeholder="2019-08-13T00:00:00.000Z" />
+        <Field name="start_time" type="date"  />
       </div>
       <div>
         <label>End Time: </label>
-        <Field name="end_time" type="text" placeholder="2019-08-13T00:00:00.000Z" />
+        <Field name="end_time" type="date" />
       </div>
       <div>
       <label>Starting Bid: $</label>
         <Field name="starting_bid" type="number" placeholder="Price" />
       </div>
-      <FormikAddItemForm values={values} addAuctionItem={addAuctionItem} />
-      <button type="submit">Add Auction</button>
+      <button type="submit">Create Auction</button>
     </Form>
     </>
   );
 }
 
 const FormikAddAuction = withFormik({
-  mapPropsToValues({ auction_name, auction_description, start_time, end_time }) {
+  mapPropsToValues({ auction_name, auction_description, start_time, end_time, starting_bid }) {
     return {
       auction_name: auction_name || "",
       auction_description: auction_description || "",
-      start_time: start_time || "YYYY-MM-DDT00:00:00.000Z",
-      end_time: end_time || "YYYY-MM-DDT00:00:00.000Z"
+      start_time: start_time || "",
+      end_time: end_time || "",
+      starting_bid: starting_bid || 0, //st
     };
   },
   handleSubmit(values, { resetForm, props }) {
     console.log('values', values);
-    props.addAuction(values);
+    props.addAuction({...values, product_id: props.productId});
     resetForm();
   }
 })(AddAuction);

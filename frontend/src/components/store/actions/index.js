@@ -37,6 +37,71 @@ export const DELETE_PRODUCT_SUCCESS = "DELETE_PRODUCT_SUCCESS";
 export const DELETE_PRODUCT_FAIL = "DELETE_PRODUCT_FAIL";
 
 //Axios for Seller Page
+
+export const getSellerProducts = () => dispatch => {
+  dispatch({ type: GET_SELLER_PRODUCTS });
+  axiosWithAuth()
+    .get(`https://silent-auction-api.herokuapp.com/seller/1/products`)
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: GET_SELLER_PRODUCTS_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: GET_SELLER_PRODUCTS_FAIL,
+        payload: err.response
+      });
+    });
+};
+
+export const addProduct = (newProduct, userid) => dispatch => {
+  dispatch({ type: POSTING_NEW_PRODUCT });
+  console.log('new product', newProduct, userid );
+  axiosWithAuth()
+    .post(`https://silent-auction-api.herokuapp.com/seller/1/products`, {...newProduct})
+    .then(res => {
+      console.log("POST data", res);
+      dispatch({
+        type: POST_NEW_PRODUCT_SUCCESS,
+        payload: newProduct
+      });
+    })
+    .catch(err => {
+      console.log("Rejected, newAuction", err);
+      console.log(newProduct);
+      dispatch({
+        type: POST_NEW_PRODUCT_FAIL,
+        payload: err.data
+      });
+    });
+};
+
+export const deleteProduct = (deleteProductId) => dispatch => {
+  dispatch({ type: DELETE_PRODUCT });
+  axiosWithAuth()
+    .delete(`https://silent-auction-api.herokuapp.com/seller/1/products/${deleteProductId}`)
+    .then(res => {
+      console.log(res);
+      dispatch({
+        type: DELETE_PRODUCT_SUCCESS,
+        payload: deleteProductId, 
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: DELETE_PRODUCT_FAIL,
+        payload: err.data
+      });
+    });
+};
+
+
+
 export const getSeller = () => dispatch => {
   dispatch({ type: GET_SELLER });
   axiosWithAuth()
@@ -61,7 +126,7 @@ export const getSeller = () => dispatch => {
 export const getSellerAuction = (userid, auctionid) => dispatch => {
     dispatch({ type: GET_SELLER_AUCTION });
     axiosWithAuth()
-    .get(`https://silent-auction-api.herokuapp.com/seller/${userid}/auctions/${auctionid}`)
+    .get(`https://silent-auction-api.herokuapp.com/seller/1/auctions/${auctionid}`)
     .then(res => {
         console.log(res.data);
         dispatch({
@@ -78,15 +143,16 @@ export const getSellerAuction = (userid, auctionid) => dispatch => {
     });
 };
 
-export const addAuction = (userid, newAuction) => dispatch => {
+export const addAuction = (newAuction, userid) => dispatch => {
   dispatch({ type: POSTING_NEW_AUCTION });
+  console.log('new auction', newAuction, userid );
   axiosWithAuth()
-    .post(`https://silent-auction-api.herokuapp.com/seller/1/auctions`, newAuction)
+    .post(`https://silent-auction-api.herokuapp.com/seller/1/auctions`, {...newAuction})
     .then(res => {
       console.log("POST data", res);
       dispatch({
         type: POST_NEW_AUCTION_SUCCESS,
-        payload: res.data
+        payload: newAuction
       });
     })
     .catch(err => {
@@ -99,15 +165,15 @@ export const addAuction = (userid, newAuction) => dispatch => {
     });
 };
 
-export const deleteAuction = (userid, auctionid) => dispatch => {
+export const deleteAuction = (deleteAuctionId) => dispatch => {
   dispatch({ type: DELETE_AUCTION });
   axiosWithAuth()
-    .delete(`https://silent-auction-api.herokuapp.com/seller/1/auctions/${auctionid}`)
+    .delete(`https://silent-auction-api.herokuapp.com/seller/1/auctions/${deleteAuctionId}`)
     .then(res => {
       console.log(res);
       dispatch({
         type: DELETE_AUCTION_SUCCESS,
-        payload: res.data
+        payload: deleteAuctionId,
       });
     })
     .catch(rej => {
@@ -122,7 +188,7 @@ export const deleteAuction = (userid, auctionid) => dispatch => {
 export const editAuction = (userid, auctionid) => dispatch => {
   dispatch({ type: EDIT_AUCTION });
   axiosWithAuth()
-    .put(`https://silent-auction-api.herokuapp.com/seller/${userid}/auctions/${auctionid}`)
+    .put(`https://silent-auction-api.herokuapp.com/seller/1/auctions/${auctionid}`)
     .then(res => {
       console.log(res);
       dispatch({
@@ -140,26 +206,6 @@ export const editAuction = (userid, auctionid) => dispatch => {
 };
 
 //Axios calls to backend for Seller auction Products
-
-export const getAllProducts = userid => dispatch => {
-    dispatch({ type: GET_SELLER_PRODUCTS });
-    axiosWithAuth()
-      .get(`https://silent-auction-api.herokuapp.com/seller/${userid}/products`)
-      .then(res => {
-        console.log(res.data);
-        dispatch({
-          type: GET_SELLER_PRODUCTS_SUCCESS,
-          payload: res.data
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        dispatch({
-          type: GET_SELLER_PRODUCTS_FAIL,
-          payload: err.response
-        });
-      });
-  };
 
 export const getSellerProduct = (userid, productid) => dispatch => {
     dispatch({ type: GET_SELLER_PRODUCT });
@@ -181,43 +227,3 @@ export const getSellerProduct = (userid, productid) => dispatch => {
     });
 };
 
-export const addProduct = (userid, newProduct) => dispatch => {
-  dispatch({ type: POSTING_NEW_PRODUCT });
-  axiosWithAuth()
-    .post(`https://silent-auction-api.herokuapp.com/seller/${userid}/products`, newProduct)
-    .then(res => {
-      console.log("POST data", res);
-      dispatch({
-        type: POST_NEW_PRODUCT_SUCCESS,
-        payload: res.data
-      });
-    })
-    .catch(err => {
-      console.log("Rejected, newProduct", err);
-      console.log(newProduct);
-      dispatch({
-        type: POST_NEW_PRODUCT_FAIL,
-        payload: err.data
-      });
-    });
-};
-
-export const deleteProduct = (userid, productid) => dispatch => {
-  dispatch({ type: DELETE_PRODUCT });
-  axiosWithAuth()
-    .delete(`https://silent-auction-api.herokuapp.com/seller/${userid}/products/${productid}`)
-    .then(res => {
-      console.log(res);
-      dispatch({
-        type: DELETE_PRODUCT_SUCCESS,
-        payload: res.data
-      });
-    })
-    .catch(rej => {
-      console.log(rej);
-      dispatch({
-        type: DELETE_PRODUCT_FAIL,
-        payload: rej.data
-      });
-    });
-};
