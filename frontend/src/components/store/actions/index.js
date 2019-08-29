@@ -82,7 +82,6 @@ export const addProduct = (newProduct, userid) => dispatch => {
 
 export const deleteProduct = (deleteProductId) => dispatch => {
   dispatch({ type: DELETE_PRODUCT });
-  // the prblem is that delete product is undefined? it;s not undefined, it's just the number 2, see
   axiosWithAuth()
     .delete(`https://silent-auction-api.herokuapp.com/seller/1/products/${deleteProductId}`)
     .then(res => {
@@ -166,15 +165,15 @@ export const addAuction = (newAuction, userid) => dispatch => {
     });
 };
 
-export const deleteAuction = (userid, auctionid) => dispatch => {
+export const deleteAuction = (deleteAuctionId) => dispatch => {
   dispatch({ type: DELETE_AUCTION });
   axiosWithAuth()
-    .delete(`https://silent-auction-api.herokuapp.com/seller/1/auctions/${auctionid}`)
+    .delete(`https://silent-auction-api.herokuapp.com/seller/1/auctions/${deleteAuctionId}`)
     .then(res => {
       console.log(res);
       dispatch({
         type: DELETE_AUCTION_SUCCESS,
-        payload: res.data
+        payload: deleteAuctionId,
       });
     })
     .catch(rej => {

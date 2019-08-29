@@ -146,8 +146,9 @@ import {
           ...state,
           isFetching: false,
           error: "",
-          products: state.products.filter((product) => (product.id !== action.payload)) //stop deleting everythinthe payload is the deleted product, we need to remove that product from the list
+          products: state.products.filter((product) => (product.id !== action.payload))
         };
+    
       case DELETE_AUCTION:
         return {
           ...state,
@@ -162,9 +163,10 @@ import {
         };
       case DELETE_AUCTION_SUCCESS:
         return {
+          ...state,
           isFetching: false,
           error: "",
-          auctions: action.payload
+          auctions: state.auctions.filter((auction) => (auction.id !== action.payload))
         };
 
         case EDIT_AUCTION:
