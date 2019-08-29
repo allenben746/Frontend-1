@@ -1,0 +1,13 @@
+$primaryBtn: rgb(56, 146, 142);
+header {
+	background: lightblue;
+	display: flex;
+	justify-content: center;
+}
+header button {
+	background: $primaryBtn;
+}
+$darkblue: #124559;
+.auction-page {
+	background: $darkblue;
+}
