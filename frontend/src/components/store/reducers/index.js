@@ -183,9 +183,10 @@ import {
           };
         case EDIT_AUCTION_SUCCESS:
           return {
+            ...state,
             isFetching: false,
             error: "",
-            smurfs: action.payload
+            auctions:  action.payload
           };
 
       default:
