@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { withFormik, Form, Field } from "formik";
 import FormikAddItemForm from './AddItemForm';
 
-function AddAuction({values, addAuctionItem}) {
+function AddAuction({values, addAuctionItem, productId}) {
   const [showForm, setShowForm] = useState(false);
 
   if(!showForm){return(
@@ -50,7 +50,7 @@ const FormikAddAuction = withFormik({
   },
   handleSubmit(values, { resetForm, props }) {
     console.log('values', values);
-    props.addAuction(values);
+    props.addAuction({...values, product_id: props.productId});
     resetForm();
   }
 })(AddAuction);

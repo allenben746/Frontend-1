@@ -80,6 +80,27 @@ export const addProduct = (newProduct, userid) => dispatch => {
     });
 };
 
+export const deleteProduct = (deleteProductId) => dispatch => {
+  dispatch({ type: DELETE_PRODUCT });
+  // the prblem is that delete product is undefined? it;s not undefined, it's just the number 2, see
+  axiosWithAuth()
+    .delete(`https://silent-auction-api.herokuapp.com/seller/1/products/${deleteProductId}`)
+    .then(res => {
+      console.log(res);
+      dispatch({
+        type: DELETE_PRODUCT_SUCCESS,
+        payload: deleteProductId, 
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: DELETE_PRODUCT_FAIL,
+        payload: err.data
+      });
+    });
+};
+
 
 
 export const getSeller = () => dispatch => {
@@ -127,7 +148,7 @@ export const addAuction = (newAuction, userid) => dispatch => {
   dispatch({ type: POSTING_NEW_AUCTION });
   console.log('new auction', newAuction, userid );
   axiosWithAuth()
-    .post(`https://silent-auction-api.herokuapp.com/seller/1/auctions`, {...newAuction, product_id: 6})
+    .post(`https://silent-auction-api.herokuapp.com/seller/1/auctions`, {...newAuction})
     .then(res => {
       console.log("POST data", res);
       dispatch({
@@ -207,22 +228,3 @@ export const getSellerProduct = (userid, productid) => dispatch => {
     });
 };
 
-export const deleteProduct = (userid, productid) => dispatch => {
-  dispatch({ type: DELETE_PRODUCT });
-  axiosWithAuth()
-    .delete(`https://silent-auction-api.herokuapp.com/seller/${userid}/products/${productid}`)
-    .then(res => {
-      console.log(res);
-      dispatch({
-        type: DELETE_PRODUCT_SUCCESS,
-        payload: res.data
-      });
-    })
-    .catch(rej => {
-      console.log(rej);
-      dispatch({
-        type: DELETE_PRODUCT_FAIL,
-        payload: rej.data
-      });
-    });
-};

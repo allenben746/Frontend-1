@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {getSeller, getSellerProducts, addAuction, addProduct, deleteAuction} from '../store/actions' 
+import {getSeller, getSellerProducts, addAuction, addProduct, deleteProduct, deleteAuction} from '../store/actions' 
 import FormikAddAuction from './AddAuction.js'
 import axiosWithAuth from '../utils/axiosWithAuth.js';
 import FormikAddItemForm from './AddItemForm.js';
@@ -17,6 +17,8 @@ const SellerOverview = (props) => {
                 props.products.map(product => (
                 <div className="auctions" key={product.product_name}>
                     <h4>Name: {product.product_name}</h4>
+                    <button onClick = {() => props.deleteProduct(product.id)}>Delete</button>
+                    <FormikAddAuction addAuction={props.addAuction} productId={product.id}/>
                 </div>
                 ))
             ) : (
@@ -41,7 +43,6 @@ const SellerOverview = (props) => {
                 <h1> Page is loading, please wait...</h1>
             )}
             </div>
-                <FormikAddAuction addAuction={props.addAuction} />
         </div>
     )
 }
@@ -55,5 +56,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    {getSellerProducts, addProduct, getSeller, addAuction, deleteAuction}
+    {getSellerProducts, addProduct, getSeller, addAuction, deleteProduct, deleteAuction}
 )(SellerOverview);

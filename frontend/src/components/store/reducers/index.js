@@ -108,27 +108,46 @@ import {
           auctions: [...state.auctions, action.payload]
         };
 
-        case POSTING_NEW_PRODUCT:
-          return {
-            ...state,
-            isFetching: true,
-            error: ""
-          };
-        case POST_NEW_PRODUCT_FAIL:
-          return {
-            ...state,
-            isFetching: false,
-            error: action.payload
-          };
-        case POST_NEW_PRODUCT_SUCCESS:
-          return {
-            ...state,
-            isFetching: false,
-            error: "",
-            products: [...state.products, action.payload]
-          };
-
-          
+      
+      case POSTING_NEW_PRODUCT:
+        return {
+          ...state,
+          isFetching: true,
+          error: ""
+        };
+      case POST_NEW_PRODUCT_FAIL:
+        return {
+          ...state,
+          isFetching: false,
+          error: action.payload
+        };
+      case POST_NEW_PRODUCT_SUCCESS:
+        return {
+          ...state,
+          isFetching: false,
+          error: "",
+          products: [...state.products, action.payload]
+        };
+      
+      case DELETE_PRODUCT:
+        return {
+          ...state,
+          isFetching: true,
+          error: ""
+        };
+      case DELETE_PRODUCT_FAIL:
+        return {
+          ...state,
+          isFetching: false,
+          error: action.payload
+        };
+      case DELETE_PRODUCT_SUCCESS:
+        return {
+          ...state,
+          isFetching: false,
+          error: "",
+          products: state.products.filter((product) => (product.id !== action.payload)) //stop deleting everythinthe payload is the deleted product, we need to remove that product from the list
+        };
       case DELETE_AUCTION:
         return {
           ...state,
