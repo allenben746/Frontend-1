@@ -18,6 +18,7 @@ import {
     DELETE_PRODUCT, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAIL,
 } from "../actions";
   
+
   const initialState = {
     products: [],
     auctions: [],
